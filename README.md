@@ -1,10 +1,10 @@
 # GitHubActions
 
-What is github actions?
+### What is github actions?
 
 GitHub Actions is a CI/CD (Continuous Integration/Continuous Delivery) platform built directly into GitHub. It lets you automate workflows triggered by events in your repository.
  
-Core concepts:
+### Core concepts:
 
 Workflows — YAML files in .github/workflows/ that define your automation
 
@@ -16,7 +16,7 @@ Steps — individual commands or pre-built actions within a job
 
 Actions — reusable units of work you can pull from the GitHub Marketplace (e.g. actions/checkout, actions/setup-node)
 
-Common use cases:
+### Common use cases:
 
 Run tests automatically on every pull request
 Build and deploy apps to AWS, GCP, Vercel, etc.
