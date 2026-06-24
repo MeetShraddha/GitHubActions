@@ -7,9 +7,13 @@ GitHub Actions is a CI/CD (Continuous Integration/Continuous Delivery) platform 
 Core concepts:
 
 Workflows — YAML files in .github/workflows/ that define your automation
+
 Triggers (Events) — what kicks off a workflow: a push, pull request, schedule, manual trigger, etc.
+
 Jobs — a set of steps that run on a virtual machine (runner)
+
 Steps — individual commands or pre-built actions within a job
+
 Actions — reusable units of work you can pull from the GitHub Marketplace (e.g. actions/checkout, actions/setup-node)
 
 Common use cases:
