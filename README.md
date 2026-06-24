@@ -19,8 +19,13 @@ Actions — reusable units of work you can pull from the GitHub Marketplace (e.g
 ### Common use cases:
 
 Run tests automatically on every pull request
+
 Build and deploy apps to AWS, GCP, Vercel, etc.
+
 Publish packages to npm or PyPI
+
 Lint and format code
+
 Send notifications (Slack, email) on events
+
 Automate issue/PR labeling
