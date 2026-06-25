@@ -1,0 +1,58 @@
+name: Daily Changelog Update
+
+on:
+  schedule:
+    # Runs every day at 9:00 AM UTC (adjust as needed)
+    # Use https://crontab.guru to customize the time
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+
+    # Grant write permission to push commits back to the repo
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Use a PAT if you need to trigger other workflows on push,
+          # otherwise the default GITHUB_TOKEN works fine
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Append entry to changelog
+        run: |
+          # Get today's date and UTC timestamp
+          DATE=$(date -u '+%Y-%m-%d')
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+
+          # Create CHANGELOG.md if it doesn't exist yet
+          if [ ! -f CHANGELOG.md ]; then
+            echo "# Changelog" > CHANGELOG.md
+            echo "" >> CHANGELOG.md
+          fi
+
+          # Append a new dated entry
+          echo "## $DATE" >> CHANGELOG.md
+          echo "- Automated daily log entry at $TIMESTAMP" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+
+          echo "Appended entry for $DATE"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add CHANGELOG.md
+
+          # Only commit if there are actual changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: daily changelog update $(date -u '+%Y-%m-%d')"
+            git push
+          fi
